@@ -12,7 +12,7 @@
 - After researching possible skills I could learn and how widely each is used in open source projects, as well as how each could be helpful to me in a future career, I decided on Vue.js due to its use in clientside software development which is in area I enjoy and am interested in.
 - It is also use fairly widely in opensource projects with an average of 20 ongoing projects found on https://goodfirstissues.com/ and https://up-for-grabs.net/#/. 
 
-- In the researched what vue is actually used for in relation to an existing webpage (how it works alongside html and javascript) by watching videos and reading documentation. This led me to simple tutorials of how to use the terminal to start a vue application.
+- I've the researched what vue is actually used for in relation to an existing webpage (how it works alongside html and javascript) by watching videos and reading documentation. This led me to simple tutorials of how to use the terminal to start a vue application.
 
 
 ### Challenges
@@ -22,6 +22,40 @@
 ### Next steps 
 - Add some simple vue.js into a simple webpage to explore and understand the basic syntax and how html components change with changes to the vue. Can do this by looking at more expamples in more detail and taking this and changes parts.
 - Then can build my own simple webpage and add vue features myself.
+
+
+
+
+
+
+## Entry 2 (3/30)
+
+# Whats been done
+https://www.w3schools.com/vue/vue_intro.php 
+
+- I have followed the w3schools tutorial on vue. This explains how to add vue to a simple HTML file. It explains how to add the Vue code using inline <script></script> tags that include the vue instance which includes data, watch, computed, and methods. It explains how to use many vue directives (v-) as well as the purpose of methods, watchers and computed properties.
+
+- I took the examples given through and played around with them to experiment with each feature and understand how it works as well as how to use aspects in the context of a webpage (mix them with other content and styling).
+
+- After completing the first section of thie tutorial (reaching the Scaling Up part), I had a large html file containing all code written from the examples and split this up into index.html, vue.js, main.css files as would be used in practice. This allowed me to see how to correctly link these pages together including understanding what order to link the vue.js file and the vue script link.
+
+
+# Challenges
+- As the examples given where in their own page (so only that content was given), I had to figure out how to add them to my existing webpage. 
+- I also had to rename some variables as they had been already used which required me to figure out which parts of the code used these variables and methods.
+
+
+# Changes to goals
+- Having actually used some Vue, I think it would be beneficial to create some webpages from scratch that utilise it in a realistic context. So, as part of this project, I want to create a simple dynamic, interactive webpage using bothe Vue and Server side javascript.
+
+
+
+# Next steps 
+- There are many more sections of the w3schools tutorial about scaling up vue and using .vue files rather than inline vue content written as javascript. As this is a more realistic application of Vue, I will go through thse further tutorials to understand how to set up my files and apply Vue in that way.
+- I will then create some simple example websites myself that use everything I have learnt so far.
+
+
+
 
 
 

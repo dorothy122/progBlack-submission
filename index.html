@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+
+<head>
+    <title>vue webpage</title>
+
+    <style>
+        /* For elements with class pinkBG */
+        .pinkBG {
+            background-color: lightpink
+        }
+
+        .impClass {
+            background-color:darkred;
+        }
+
+        .myClass { 
+            background-color:darkseagreen
+        }
+
+        figure {
+            width:80px;
+        }
+
+        figcaption {
+            text-align: center
+        }
+
+        .box {
+            width: 200px;
+            height: 80px;
+            border: dashed black;
+            background-color: cadetblue;
+        }
+
+        .foodClick {
+            border: dashed black;
+            width: 220px;
+            padding: 20px;
+        }
+
+        li:hover {
+            cursor: pointer;
+            background-color: rgb(224, 224, 224);
+        }
+
+        #app > ol {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #app li {
+            padding-left: 6px;
+            border-radius: 5px;
+            width: 70px;
+        }
+
+        .notebook span {
+            width: 100%;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 2.55em;
+            transform-origin: 0 0;
+            rotate: 0deg;
+            position: absolute;
+            top: 160px;
+            left: 0px;
+        }
+
+        .notebook textarea {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .mooseBox {
+            width: 200px;
+            height: 190px;
+            border: dashed black; 
+        }
+
+        .tigerBox {
+            width: 200px;
+            height: 255px;
+            border: dashed black;
+        }
+
+        .yelClass {
+            color:darkgoldenrod
+        }
+
+        .italicClass {
+            font-style: italic
+        }
+
+        .valid {
+            color: green
+        }
+
+        .invalid {
+            color: darkred
+        }
+
+        .animalImg {
+            width: 200px;
+            height: 200px
+        }
+
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+    <div id="app"> 
+        <!-- inserts whats inside the {{ }} to this point on the page -->
+        {{ message }} <br>
+        {{ "Random number: " + Math.ceil(Math.random()*6) }}
+
+    <!-- v-bind-->
+        <!-- v-bind adds value of vueClass to contents of the tags -->
+        <div v-bind:class = "vueClass">Hello</div>
+
+        <br>
+        <!-- v-bind -->
+        <div v-bind:style = "{ fontSize: size + 'em'}">
+            v-bind example
+        </div>
+
+        <div v-bind:style = "{ backgroundColor: 'hsl('+bgVal+', 80%, 80%)'}">
+            background colour
+        </div>
+
+        <!-- set isImportant in the data section -->
+        <div v-bind:style = "{ backgroundColor: isImportant ? 'lightcoral': 'lightgray' }">
+            conditional background
+        </div>
+
+        <div v-bind:class = "className">
+            The class is set with vue
+        </div>
+
+        <!-- FIND MORE EXAMPLES FOR THIS ONE -->
+        <div v-bind:class = "{ myClass: true }">
+            class set conditionally with boolean
+        </div>
+
+        <div v-bind:class = "{ myClass: isImportant }">
+            class set conditonally by value of another variable
+        </div>
+
+    <!-- v-if -->
+        <p v-if = "InStock">
+            in stock
+        </p>
+        <p v-else>
+            not in stock
+        </p>
+
+        <div v-bind:class = " 'impClass' ">
+        <p v-if = "count < 10">
+            Restock
+        </p>
+        </div>
+
+        <div id="app">
+            <p v-if = "text.includes('pizza')">The text includes the word 'pizza'</p>
+            <p v-else>The word 'pizza' is not found in the text</p>
+        </div>
+
+        <div id="app">
+            <div v-if = "text2.includes('hello')">
+                <p>Text includes word hello</p>
+                <p>can write more text using the div tags</p>
+            </div>
+            <div v-else>
+                <p>text doesnt include word hello</p>
+            </div>
+        </div>
+
+    <!-- v-show -->
+        <div v-show="showDiv">
+            this can be hidden
+        </div>
+
+
+    <!-- v-for -->
+        <!-- contents of {{ }} is what is put into the list-->
+        <!-- loop stores each food as x and then {{ }} puts the value into the list -->
+        <ol>
+            <li v-for = "x in manyFoods"> {{ x }} </li>
+        </ol>
+
+        <div>
+            <figure v-for = "x in manyFoodsArray">
+                <img v-bind:src = "x.url">
+                <figcaption> {{ x.name }} </figcaption>
+            </figure>
+        </div>
+
+
+        <p v-for = "(x, index) in manyFoods">
+            {{ index }}: "{{ x }}" <br>
+        </p>
+
+        <p v-for = "(x, index) in manyFoodsArray">
+            {{ index }}: "{{ x.name }}", url: "{{ x.url }}" <br>
+        </p>
+
+
+    <!-- v-on, events -->
+        <img src = "img_moose.jpg">
+        <!-- on button click, moose count increases-->
+        <p>{{ "Moos count: " + count }}</p>
+        <button v-on:click = "count++">Count moose</button>
+
+        <!--FIND EXPLAINATION FOR HOW TO USE THIS -->
+        <p v-on:click = "changeColor">Click me</p>
+
+
+        <!-- Lights on appears/disappears when button is pressed -->
+        <div id="lightDiv">
+            <div v-show = "lightOn">Lights on</div>
+        </div>
+        <button v-on:click = "lightOn = !lightOn">Switch light</button>
+
+
+        <!-- count increases when anything is put in the input -->
+        <input v-on:input = "inpCount++">
+        <p>{{ 'Input events occured: ' + inpCount }}</p>
+
+
+        <p>Move mouse pointer over the box</p>
+        <div v-bind:class = " 'box' "
+            v-on:mousemove = "colorVal = Math.floor(Math.random()*360)"
+            v-bind:style = "{backgroundColor:'hsl('+colorVal+', 60%, 60%)'}">
+        </div>
+
+        <br>
+
+        <div class="foodClick">
+            <img v-bind:src = "imgUrl">
+            <ol>
+                <li v-for="food in manyFoodsArray" v-on:click = "imgUrl=food.url">
+                    {{ food.name }}
+                </li>
+            </ol>
+        </div>
+
+    <br>
+
+<!-- vue methods -->
+        <div v-bind:class = " 'box' " v-on:click = "writeText1">
+            {{ text1 }}
+        </div>
+
+
+        <p>Move mouse over box</p>
+        <div v-on:mousemove = "mousePos" 
+            v-bind:class = " 'box' "
+            v-bind:style = "{ backgroundColor: 'hsl('+xPos+', 80%, 80%)' }">
+            <span>xPos: {{ xPos }}</span>
+            <br>
+            <span>yPos: {{ yPos }}</span>
+        </div>
+
+        <br>
+        <div class="notebook">
+            <textarea v-on:input = "writeText2" rows = "8" cols = "30" placeholder = "Start writing..."></textarea>
+            <span>{{ text2 }}</span>
+        </div>
+
+
+        <br>
+        <img src = "images/img_moose.jpg" v-bind:class=" 'animalImg' ">
+        <div class="mooseBox">
+            <p>{{ "Moose count: " + mooseCount }}</p>
+            <button v-on:click = "addMoose(+1)">+1</button>
+            <button v-on:click = "addMoose(+5)">+5</button>
+            <button v-on:click = "addMoose(-1)">-1</button>
+        </div>
+
+
+        <br>
+        <img src = "images/img_tiger.jpeg" id="tiger"
+            v-on:click = "myMethod($event, 'Hello')"
+            v-bind:class=" 'animalImg' ">
+        <p v-bind:class = " 'tigerBox' "> {{ msgAndId }} </p>
+
+
+    <br>
+    <!-- event modifiers -->
+        
+        <!-- .once = only run onces -->
+        <p> click the button! </p>
+        <button v-on:click.once = "createAlert">Create Alert</button>
+
+        <!-- keyboard event modifiers -->
+        <br>
+        <br>
+        <p>Type to see latest key: </p>
+        <input v-on:keydown = "getKey">
+        <p> {{ keyValue }} </p>
+
+        <br>
+
+        <p>Press the 's' key</p>
+        <textarea v-on:keyup.s = "createAlertS"></textarea>
+
+        <br>
+
+        <p>Press the 's' and 'ctrl' keys</p>
+        <textarea v-on:keydown.ctrl.s = "createAlertSCtrl"></textarea>
+
+        <!-- mouse button -->
+        <div v-on:click.left = "changeColor" 
+            v-bind:style = "{backgroundColor:'hsl('+bgColor+', 80%, 80%)'}">
+            <p>Press left mouse button here</p>
+        </div>
+
+            <!--combination-->
+        <div v-on:click.left.ctrl = "changeColorCtrl" 
+            v-bind:style = "{backgroundColor:'hsl('+bgColorCtrl+', 80%, 80%)'}">
+            <p>Press left mouse + ctrl here</p>
+        </div>
+
+            <!-- .prevent stops the default action e.g. dropdown when right click -->
+        <div v-on:click.right.prevent = "changeColorRight"
+            v-bind:style = "{backgroundColor:'hsl('+bgColorRight+', 80%, 80%)'}">
+            <p>Press right mouse button here</p>
+        </div>
+
+
+        <br>
+    <!-- forms (v-model)-->
+        
+        <!-- normal html form -->
+        <!-- would need more complex javaScript to store and output the inputs -->
+        <form>
+            <p>Add item</p>
+            <p>Item name: <input type="text" required> </p>
+            <p>How many: <input tupe="number"> </p>
+            <button type="submit">Add item</button>
+        </form>
+        <hr>
+        <!-- vue form -->
+        <!-- stores inputs, uses method. Adds shopping list to page -->
+    <!--    <form v-on:submit.prevent = "addItem">
+            <p>Add item</p>
+            <p>Item name: <input type="text" required v-model = "itemName"> </p>
+            <p>How many: <input tupe="number" v-model = "itemNumber"> </p>
+            <button type="submit">Add item</button>
+        </form>
+        <p>Shopping list: </p>
+        <ul>
+            <li v-for = "item in shoppingList"> {{ item.name}}, {{ item.number }}</li>
+        </ul>
+    -->
+
+    
+    <!-- v-model explained -->
+        <!-- see input box content immedietely shown on webpage -->
+        <input type = "text" v-model = "inpText">
+        <p> {{ inpText }} </p>
+
+        <hr>
+
+        <!-- checkbox -->
+        <form>
+            <p> Important item? 
+                <label>
+                    <input type = "checkbox" v-model = "important">
+                    {{ important }}
+                </label>
+            </p>
+        </form>
+
+        <hr>
+
+        <!-- combined example-->
+        <form v-on:submit.prevent = "addItem">
+            <p>Add item</p>
+            <p>Item name: <input type="text" required v-model="itemName"> </p>
+            <p>How many: <input type="number" v-model="itemNumber" > </p>
+            <p>Important?
+                <label>
+                    <input type="checkbox" v-model="itemImportant">
+                    {{ important }}
+                </label>
+            </p>
+            <button type="submit">Add item</button>
+        </form>
+
+        <p><strong>Shopping list: </strong></p>
+        <ul id="ulToFind">
+            <li v-for="item in shoppingList"
+                v-bind:class="{ impClass: item.important }"
+                v-on:click="item.found=!item.found"
+                v-show="!item.found">
+                {{ item.name }}, {{ item.number }}
+            </li>
+        </ul>
+        <ul id="ulFound">
+            <li v-for="item in shoppingList"
+                v-bind:class="{ impClass: item.important }"
+                v-on:click="item.found=!item.found"
+                v-show="item.found">
+                {{ item.name }}, {{ item.number }}
+            </li>
+        </ul>
+
+
+        <hr>
+
+    <!-- dynamic css -->
+    <!-- use v-bind:style -->
+        <!-- can give elements both class and v-bind:class so that its part of 2 classes -->
+
+        <!-- range-->
+        <p>
+            <input type="range" min="0" max="1" step="0.1" v-model="opacityVal">
+            {{ opacityVall }} (opacity value)
+        </p>
+        <div v-bind:class=" 'box' " id="opTop" v-bind:style="{ backgroundColor: 'rgba(155,20,20, '+opacityVal+')'}">
+            Drag the range input to change opacity
+        </div>
+
+        <br>
+        <hr>
+
+        <!-- v-bind class -->
+
+            <!-- belongs to class if variable true-->
+        <div v-bind:class = "{yelClass: isYellow, impClass: isImportant}">
+            This tag can belong to both 'impClass' and 'yelClass'.
+            This depends on the values of isYellow and isImportant
+        </div>
+
+        <br>
+
+            <!-- use array to have conditional class and definate class-->
+        <div v-bind:class = "[{ impClass: isImportant }, 'italicClass' ]">
+            This tag belongs to 1 or 2 classes depending on the 'isImportant' property
+        </div>
+
+        <hr>
+
+
+<!-- computed -->
+
+        <!-- converts yes/no to true/false -->
+        <input type="checkbox" v-model="chbxVal"> {{ isImportant }}
+
+        
+
+        <hr>
+<!-- watcher -->
+        <p>A watcher is used so that values between 20 and 60 are not possible to chose</p>
+    
+        <input type="range" min="0" max="100" step="1" v-model="rangeVal">
+        <p> <code> {{ rangeVal }} </code> </p>
+
+        <hr>
+
+        <p>Watcher finds difference between clicks</p>
+
+        <div v-on:click="updatePos" v-bind:class=" 'box' "></div>
+        <p> <code> {{ xDiff }} </code> </p>
+
+        <hr>
+
+
+        <label>
+            <p>Type a valid e-mail address: </p>
+            <input type="email" v-model="inpAddress">
+        </label>
+        <p v-bind:class="myClass"> <code>
+            {{ feedbackText }}
+        </code> </p>
+
+
+        
+        <br>
+    </div>
+
+
+
+    
+
+    
+
+
+
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    message: "Hello World!",
+                    
+                    vueClass: "pinkBG",
+
+                    size: 1.5,
+
+                    bgVal: 200,
+
+                    isImportant: true,
+
+                    className: "impClass",
+
+                    InStock: true,
+
+                    count: 1,
+
+                    text: 'I want pizza',
+
+                    text2: "hello",
+
+                    showDiv: false,
+
+                    manyFoods: [
+                        'Burrito',
+                        'Salad',
+                        'Cake'
+                    ],
+
+                    manyFoodsArray: [
+                        {name: 'Burrito', url: 'images/img_burrito.svg'},
+                        {name: 'Salad', url: 'images/img_salad.svg'},
+                        {name: 'Cake', url: 'images/img_cake.svg'}
+                    ],
+
+                    count: 0,
+
+                    lightOn:false,
+
+                    inpCount: 0,
+
+                    colorVal: 50,
+
+                    imgUrl: 'images/img_salad.svg',
+
+                    text1: '',
+                    text2: '',
+
+                    xPos: 0,
+                    yPos: 0,
+
+                    mooseCount: 0,
+
+                    msgAndId: '',
+
+                    keyValue: '',
+
+                    bgColor: 0,
+                    bgColorCtrl: 0,
+                    bgColorRight: 0,
+
+                    itemName: null,
+                    itemNumber: null,
+                    important:false,
+                    shoppingList: [
+                        { name: 'Tomatoes', number: 5, important: false, found: false }
+                    ],
+
+                    inpText: 'Change this text',
+
+                    opacityVal: 0.8,
+
+                    isYellow: true,
+
+                    chbxVal: false,
+
+                    rangeVal: 70,
+
+                    xDiff: 0,
+
+                    inpAddress: '',
+                    feedbackText: '',
+                    myClass: 'invalid',
+
+                }
+            },
+
+        // Template replaces content of 'app' section with contents of th template section
+            // template: 
+
+            //    `<h1>{{ message }}</h1>
+            //    <p>Line of code</p>`,
+            
+            
+            watch: {
+
+                rangeVal(val) {
+                    if (val>20 && val<60) {
+                        if (val<40) {
+                            this.rangeVal = 20;
+                        }
+                        else {
+                            this.rangeVal = 60;
+                        }
+                    }
+                },
+
+                xPos(newVal, oldVal) {
+                    this.xDiff = newVal-oldVal
+                },
+
+                inpAddress(newVal, oldVal) {
+                    if(!newVal.includes('@')) {
+                        this.feedbackText = 'The email address is NOT valid';
+                        this.myClass = 'invalid';
+                    }
+                    else if(!oldVal.includes('@') && newVal.includes('@') ) {
+                        this.feedbackText = 'Perfect! You fixed it!';
+                        this.myClass = 'valid';
+                    }
+                    else {
+                        this.feedbackText = 'The e-mail address is valid :)';
+                        this.myClass = 'valid'
+                    }
+                }
+
+            },
+
+
+
+            computed: {
+                isImportant() {
+                    if(this.chbxVal) {
+                        return 'yes'
+                    }
+                    else {
+                        return 'no'
+                    }
+                }
+
+
+
+
+            },
+
+
+
+
+
+
+            methods: {
+                writeText1() {
+                    this.text1 = "Hello World!"
+                },
+
+                mousePos(event) {
+                    this.xPos = event.offsetX
+                    this.yPos = event.offsetY
+                },
+
+                writeText2() {
+                    this.text2 = event.target.value
+                },
+
+                addMoose(number) {
+                    this.mooseCount += number
+                },
+
+                myMethod(e,msg) {
+                    this.msgAndId = msg + ', '
+                    this.msgAndId += e.target.id
+                },
+
+                createAlert() {
+                    alert("Alert created from button click")
+                },
+
+
+                getKey(evt) {
+                    this.keyValue = evt.key
+                    console.log(evt.key)
+                },
+
+                createAlertS() {
+                    alert("You pressed the 'S' key!")
+                },
+
+                createAlertSCtrl() {
+                    alert("You pressed the 'S' and 'Ctrl' keys")
+                },
+
+                changeColor() {
+                    this.bgColor += 50
+                },
+
+                changeColorCtrl() {
+                    this.bgColorCtrl += 50
+                },
+
+                changeColorRight() {
+                    this.bgColorRight += 50
+                },
+
+                addItem() {
+                    let item = {
+                        name: this.itemName,
+                        number: this.itemNumber,
+                        important: this.itemImportant,
+                        found: false
+                    }
+
+                    this.shoppingList.push(item);
+                    this.itemName = null
+                    this.itemNumber = null
+                    this.itemImportant = false
+                },
+
+
+                updatePos(evt) {
+                    this.xPos = evt.offsetX
+                }
+
+            }
+        })
+
+        app.mount("#app")
+
+    </script>
+
+
+
+</body>

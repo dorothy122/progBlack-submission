@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<head>
+    <title></title>
+
+    <link rel="stylesheet" href="main.css">
+
+
+</head>
+
+<body>
+
+
+     <div id="app"> 
+        <!-- inserts whats inside the {{ }} to this point on the page -->
+        {{ message }} <br>
+        {{ "Random number: " + Math.ceil(Math.random()*6) }}
+
+    <!-- v-bind-->
+        <!-- v-bind adds value of vueClass to contents of the tags -->
+        <div v-bind:class = "vueClass">Hello</div>
+
+        <br>
+        <!-- v-bind -->
+        <div v-bind:style = "{ fontSize: size + 'em'}">
+            v-bind example
+        </div>
+
+        <div v-bind:style = "{ backgroundColor: 'hsl('+bgVal+', 80%, 80%)'}">
+            background colour
+        </div>
+
+        <!-- set isImportant in the data section -->
+        <div v-bind:style = "{ backgroundColor: isImportant ? 'lightcoral': 'lightgray' }">
+            conditional background
+        </div>
+
+        <div v-bind:class = "className">
+            The class is set with vue
+        </div>
+
+        <!-- FIND MORE EXAMPLES FOR THIS ONE -->
+        <div v-bind:class = "{ myClass: true }">
+            class set conditionally with boolean
+        </div>
+
+        <div v-bind:class = "{ myClass: isImportant }">
+            class set conditonally by value of another variable
+        </div>
+
+    <!-- v-if -->
+        <p v-if = "InStock">
+            in stock
+        </p>
+        <p v-else>
+            not in stock
+        </p>
+
+        <div v-bind:class = " 'impClass' ">
+        <p v-if = "count < 10">
+            Restock
+        </p>
+        </div>
+
+        <div id="app">
+            <p v-if = "text.includes('pizza')">The text includes the word 'pizza'</p>
+            <p v-else>The word 'pizza' is not found in the text</p>
+        </div>
+
+        <div id="app">
+            <div v-if = "text2.includes('hello')">
+                <p>Text includes word hello</p>
+                <p>can write more text using the div tags</p>
+            </div>
+            <div v-else>
+                <p>text doesnt include word hello</p>
+            </div>
+        </div>
+
+    <!-- v-show -->
+        <div v-show="showDiv">
+            this can be hidden
+        </div>
+
+
+    <!-- v-for -->
+        <!-- contents of {{ }} is what is put into the list-->
+        <!-- loop stores each food as x and then {{ }} puts the value into the list -->
+        <ol>
+            <li v-for = "x in manyFoods"> {{ x }} </li>
+        </ol>
+
+        <div>
+            <figure v-for = "x in manyFoodsArray">
+                <img v-bind:src = "x.url">
+                <figcaption> {{ x.name }} </figcaption>
+            </figure>
+        </div>
+
+
+        <p v-for = "(x, index) in manyFoods">
+            {{ index }}: "{{ x }}" <br>
+        </p>
+
+        <p v-for = "(x, index) in manyFoodsArray">
+            {{ index }}: "{{ x.name }}", url: "{{ x.url }}" <br>
+        </p>
+
+
+    <!-- v-on, events -->
+        <img src = "img_moose.jpg">
+        <!-- on button click, moose count increases-->
+        <p>{{ "Moos count: " + count }}</p>
+        <button v-on:click = "count++">Count moose</button>
+
+        <!--FIND EXPLAINATION FOR HOW TO USE THIS -->
+        <p v-on:click = "changeColor">Click me</p>
+
+
+        <!-- Lights on appears/disappears when button is pressed -->
+        <div id="lightDiv">
+            <div v-show = "lightOn">Lights on</div>
+        </div>
+        <button v-on:click = "lightOn = !lightOn">Switch light</button>
+
+
+        <!-- count increases when anything is put in the input -->
+        <input v-on:input = "inpCount++">
+        <p>{{ 'Input events occured: ' + inpCount }}</p>
+
+
+        <p>Move mouse pointer over the box</p>
+        <div v-bind:class = " 'box' "
+            v-on:mousemove = "colorVal = Math.floor(Math.random()*360)"
+            v-bind:style = "{backgroundColor:'hsl('+colorVal+', 60%, 60%)'}">
+        </div>
+
+        <br>
+
+        <div class="foodClick">
+            <img v-bind:src = "imgUrl">
+            <ol>
+                <li v-for="food in manyFoodsArray" v-on:click = "imgUrl=food.url">
+                    {{ food.name }}
+                </li>
+            </ol>
+        </div>
+
+    <br>
+
+<!-- vue methods -->
+        <div v-bind:class = " 'box' " v-on:click = "writeText1">
+            {{ text1 }}
+        </div>
+
+
+        <p>Move mouse over box</p>
+        <div v-on:mousemove = "mousePos" 
+            v-bind:class = " 'box' "
+            v-bind:style = "{ backgroundColor: 'hsl('+xPos+', 80%, 80%)' }">
+            <span>xPos: {{ xPos }}</span>
+            <br>
+            <span>yPos: {{ yPos }}</span>
+        </div>
+
+        <br>
+        <div class="notebook">
+            <textarea v-on:input = "writeText2" rows = "8" cols = "30" placeholder = "Start writing..."></textarea>
+            <span>{{ text2 }}</span>
+        </div>
+
+
+        <br>
+        <img src = "images/img_moose.jpg" v-bind:class=" 'animalImg' ">
+        <div class="mooseBox">
+            <p>{{ "Moose count: " + mooseCount }}</p>
+            <button v-on:click = "addMoose(+1)">+1</button>
+            <button v-on:click = "addMoose(+5)">+5</button>
+            <button v-on:click = "addMoose(-1)">-1</button>
+        </div>
+
+
+        <br>
+        <img src = "images/img_tiger.jpeg" id="tiger"
+            v-on:click = "myMethod($event, 'Hello')"
+            v-bind:class=" 'animalImg' ">
+        <p v-bind:class = " 'tigerBox' "> {{ msgAndId }} </p>
+
+
+    <br>
+    <!-- event modifiers -->
+        
+        <!-- .once = only run onces -->
+        <p> click the button! </p>
+        <button v-on:click.once = "createAlert">Create Alert</button>
+
+        <!-- keyboard event modifiers -->
+        <br>
+        <br>
+        <p>Type to see latest key: </p>
+        <input v-on:keydown = "getKey">
+        <p> {{ keyValue }} </p>
+
+        <br>
+
+        <p>Press the 's' key</p>
+        <textarea v-on:keyup.s = "createAlertS"></textarea>
+
+        <br>
+
+        <p>Press the 's' and 'ctrl' keys</p>
+        <textarea v-on:keydown.ctrl.s = "createAlertSCtrl"></textarea>
+
+        <!-- mouse button -->
+        <div v-on:click.left = "changeColor" 
+            v-bind:style = "{backgroundColor:'hsl('+bgColor+', 80%, 80%)'}">
+            <p>Press left mouse button here</p>
+        </div>
+
+            <!--combination-->
+        <div v-on:click.left.ctrl = "changeColorCtrl" 
+            v-bind:style = "{backgroundColor:'hsl('+bgColorCtrl+', 80%, 80%)'}">
+            <p>Press left mouse + ctrl here</p>
+        </div>
+
+            <!-- .prevent stops the default action e.g. dropdown when right click -->
+        <div v-on:click.right.prevent = "changeColorRight"
+            v-bind:style = "{backgroundColor:'hsl('+bgColorRight+', 80%, 80%)'}">
+            <p>Press right mouse button here</p>
+        </div>
+
+
+        <br>
+    <!-- forms (v-model)-->
+        
+        <!-- normal html form -->
+        <!-- would need more complex javaScript to store and output the inputs -->
+        <form>
+            <p>Add item</p>
+            <p>Item name: <input type="text" required> </p>
+            <p>How many: <input tupe="number"> </p>
+            <button type="submit">Add item</button>
+        </form>
+        <hr>
+        <!-- vue form -->
+        <!-- stores inputs, uses method. Adds shopping list to page -->
+    <!--    <form v-on:submit.prevent = "addItem">
+            <p>Add item</p>
+            <p>Item name: <input type="text" required v-model = "itemName"> </p>
+            <p>How many: <input tupe="number" v-model = "itemNumber"> </p>
+            <button type="submit">Add item</button>
+        </form>
+        <p>Shopping list: </p>
+        <ul>
+            <li v-for = "item in shoppingList"> {{ item.name}}, {{ item.number }}</li>
+        </ul>
+    -->
+
+    
+    <!-- v-model explained -->
+        <!-- see input box content immedietely shown on webpage -->
+        <input type = "text" v-model = "inpText">
+        <p> {{ inpText }} </p>
+
+        <hr>
+
+        <!-- checkbox -->
+        <form>
+            <p> Important item? 
+                <label>
+                    <input type = "checkbox" v-model = "important">
+                    {{ important }}
+                </label>
+            </p>
+        </form>
+
+        <hr>
+
+        <!-- combined example-->
+        <form v-on:submit.prevent = "addItem">
+            <p>Add item</p>
+            <p>Item name: <input type="text" required v-model="itemName"> </p>
+            <p>How many: <input type="number" v-model="itemNumber" > </p>
+            <p>Important?
+                <label>
+                    <input type="checkbox" v-model="itemImportant">
+                    {{ important }}
+                </label>
+            </p>
+            <button type="submit">Add item</button>
+        </form>
+
+        <p><strong>Shopping list: </strong></p>
+        <ul id="ulToFind">
+            <li v-for="item in shoppingList"
+                v-bind:class="{ impClass: item.important }"
+                v-on:click="item.found=!item.found"
+                v-show="!item.found">
+                {{ item.name }}, {{ item.number }}
+            </li>
+        </ul>
+        <ul id="ulFound">
+            <li v-for="item in shoppingList"
+                v-bind:class="{ impClass: item.important }"
+                v-on:click="item.found=!item.found"
+                v-show="item.found">
+                {{ item.name }}, {{ item.number }}
+            </li>
+        </ul>
+
+
+        <hr>
+
+    <!-- dynamic css -->
+    <!-- use v-bind:style -->
+        <!-- can give elements both class and v-bind:class so that its part of 2 classes -->
+
+        <!-- range-->
+        <p>
+            <input type="range" min="0" max="1" step="0.1" v-model="opacityVal">
+            {{ opacityVall }} (opacity value)
+        </p>
+        <div v-bind:class=" 'box' " id="opTop" v-bind:style="{ backgroundColor: 'rgba(155,20,20, '+opacityVal+')'}">
+            Drag the range input to change opacity
+        </div>
+
+        <br>
+        <hr>
+
+        <!-- v-bind class -->
+
+            <!-- belongs to class if variable true-->
+        <div v-bind:class = "{yelClass: isYellow, impClass: isImportant}">
+            This tag can belong to both 'impClass' and 'yelClass'.
+            This depends on the values of isYellow and isImportant
+        </div>
+
+        <br>
+
+            <!-- use array to have conditional class and definate class-->
+        <div v-bind:class = "[{ impClass: isImportant }, 'italicClass' ]">
+            This tag belongs to 1 or 2 classes depending on the 'isImportant' property
+        </div>
+
+        <hr>
+
+
+<!-- computed -->
+
+        <!-- converts yes/no to true/false -->
+        <input type="checkbox" v-model="chbxVal"> {{ isImportant }}
+
+        
+
+        <hr>
+<!-- watcher -->
+        <p>A watcher is used so that values between 20 and 60 are not possible to chose</p>
+    
+        <input type="range" min="0" max="100" step="1" v-model="rangeVal">
+        <p> <code> {{ rangeVal }} </code> </p>
+
+        <hr>
+
+        <p>Watcher finds difference between clicks</p>
+
+        <div v-on:click="updatePos" v-bind:class=" 'box' "></div>
+        <p> <code> {{ xDiff }} </code> </p>
+
+        <hr>
+
+
+        <label>
+            <p>Type a valid e-mail address: </p>
+            <input type="email" v-model="inpAddress">
+        </label>
+        <p v-bind:class="myClass"> <code>
+            {{ feedbackText }}
+        </code> </p>
+
+
+        
+        <br>
+    </div>
+
+
+
+<!-- links to css an script -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script src="vue.js"></script>
+
+</body>

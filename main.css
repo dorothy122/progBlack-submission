@@ -1,0 +1,102 @@
+/* For elements with class pinkBG */
+.pinkBG {
+    background-color: lightpink
+}
+
+.impClass {
+    background-color:darkred;
+}
+
+.myClass { 
+    background-color:darkseagreen
+}
+
+figure {
+    width:80px;
+}
+
+        figcaption {
+            text-align: center
+        }
+
+        .box {
+            width: 200px;
+            height: 80px;
+            border: dashed black;
+            background-color: cadetblue;
+        }
+
+        .foodClick {
+            border: dashed black;
+            width: 220px;
+            padding: 20px;
+        }
+
+        li:hover {
+            cursor: pointer;
+            background-color: rgb(224, 224, 224);
+        }
+
+        #app > ol {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #app li {
+            padding-left: 6px;
+            border-radius: 5px;
+            width: 70px;
+        }
+
+        .notebook span {
+            width: 100%;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 2.55em;
+            transform-origin: 0 0;
+            rotate: 0deg;
+            position: absolute;
+            top: 160px;
+            left: 0px;
+        }
+
+        .notebook textarea {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .mooseBox {
+            width: 200px;
+            height: 190px;
+            border: dashed black; 
+        }
+
+        .tigerBox {
+            width: 200px;
+            height: 255px;
+            border: dashed black;
+        }
+
+        .yelClass {
+            color:darkgoldenrod
+        }
+
+        .italicClass {
+            font-style: italic
+        }
+
+        .valid {
+            color: green
+        }
+
+        .invalid {
+            color: darkred
+        }
+
+        .animalImg {
+            width: 200px;
+            height: 200px
+        }
+
+
